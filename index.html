@@ -39,7 +39,46 @@
         <ul></ul>
       </nav>
       <section>
-        <p>&lt;&gt;&lt;&gt; CHANGELOG DIA 3/12/2014 &lt;&gt;&lt;&gt;
+        <p>&lt;&gt;&lt;&gt; CHANGELOG DIA 24/12/2014 &lt;&gt;&lt;&gt;</p>
+
+<p>Tras unos días de aburrimiento, finalmente me he animado a tocar la parte de los eventos; me he cargado toda la herencia de los eventos. Motivo: en un principio pensaba que, por razones de peso, almacenar únicamente los datos a enviar en el evento mejoraría la eficiencia. </p>
+
+<p>Pero después de una observación de la clase EventObject, me he dado cuenta de que todos los eventos de Java se crean con el objeto emisor, y mediante el método getSource() se establecía un "puente lógico" entre los objetos que permitía al receptor obtener toda la información que necesite del emisor.</p>
+
+<p>Pensado en esto, he modificado el método agregarEmisor() y lo he establecido como constructor, ya que no voy a tener nunca más de un emisor, y nada de crear eventos sin emisor, muy estúpido por mi parte.</p>
+
+<p>Luego hice que los objetos MVC principales se enviaran mensajes por pantalla, como si estuviesen hablando, llamado desde InformaT para asegurarme que no me había equivocado. Una vez terminado el mensaje, el modelo enviaba a la vista, la vista al controlador, y el controlador al modelo. Un StackOverflow muy gracioso por despistado xd.</p>
+
+<p>Ahora a hacer la documentación de estas clases. Creo que no voy a hacer un JAVADOC de momento, y voy a recurrir al comentario.  </p>
+
+<p>&lt;&gt;&lt;&gt; CHANGELOG DIA 21/12/2014 &lt;&gt;&lt;&gt;
+Considerando las opciones gráficas de processing, lo mejor es hacer un híbrido, usando Processing para cargar XML y hacer operaciones cliente/servidor sobre la clase modelo, y usar swing para la clase Vista, no parece hacer conflicto alguno entre ambos así que va bien.</p>
+
+<p>Además, he redefinido la forma de conectar las clases principales al MVC, y he desligado la instancia principal de Processing, que reservaré exclusivamente para operar con modelos, así como la Vistaprincipal y ModeloPrincipal, encargados de iniciar la aplicación.</p>
+
+<p>Antes de avanzar en complejidad en la aplicación, tengo que hacer dos cosas; definir el javadoc de las clases que tengo, y establecer cómo voy a diseñar los eventos de Modelo, Vista y Controlador.</p>
+
+<p>Por fin presiento que la aplicación ha pasado la fase de scratch y tanto mi mentalidad como la aplicación está empezando a tomar forma.   </p>
+
+<p>&lt;&gt;&lt;&gt; CHANGELOG DIA 20/12/2014 &lt;&gt;&lt;&gt;
+Al final he decidido que la conexión del MVC se resuma en una clase con elementos estáticos de las clases base de la aplicación, de modo que la búsqueda de modelos y vistas será de manera ascendente en la relación de composición y usando el identificador para localizar el elemento en cuestión.</p>
+
+<p>Además, finalmente me he decantado por Processing, siendo éste mucho más sencillo y flexible que Swing a la hora de diseñar interfaces, donde draw() es el hilo principal de la aplicación, el cual conecto a MVC para dar servicio a todos los elementos del MVC, de manera muy parecida al sistema que usé el primer día que subí este changelog.</p>
+
+<p>Parece ser que, dado el grado de interés de mis compañeros, al final soy sólo yo el que va a hacer esta aplicación, por lo tanto espero que sea posible realizar esta aplicación con la misma calidad que esperaba cuando contaba con tres personas. </p>
+
+<p>&lt;&gt;&lt;&gt; CHANGELOG DIA 17/12/2014 &lt;&gt;&lt;&gt;
+El MVC, y por tanto lo que hay de aplicación, se ha rediseñado para incluir eventos caseros, más intutivos, y que son independientes de mi decisión final entre el uso de swing o processing. Este ya es el modelo definitivo. </p>
+
+<p>Además, he cascado los comentarios de documentación, que reservaré para el JAVADOC, y para separar atributos, constructores y métodos he incluido comentarios que los agrupan por funciones.</p>
+
+<p>Aún desconozco si mis compañeros de clase van a participar, ya que no he recibido confirmación de ningún tipo, espero tener la respuesta mañana.</p>
+
+<p>&lt;&gt;&lt;&gt; CHANGELOG DIA 12/12/2014 &lt;&gt;&lt;&gt;
+Mediante una conversación sobre el diseño de las clases padre que van a controlar la aplicación, decidí remodelar la estructura de las mismas. Al igual que en el changelog anterior, no tengo desarrolladas más que la instancia de Processing que crea la aplicación y el SINGLETON que encapsula esa instancia para ser usada por el modelo MVC y sus clases hijas.
+Una vez más, favor de no valorar.</p>
+
+<p>&lt;&gt;&lt;&gt; CHANGELOG DIA 3/12/2014 &lt;&gt;&lt;&gt;
 He metido los diseños de la aplicación en /doc, y en /lib están las librerías de Processing.</p>
 
 <p>He desarrollado en /src sólo Processing y ClaseProcessing para asegurar compatibilidad total con el modelo de aplicación MVC y su correspondiente desglose, únicamente para asegurar que podría desarrollar semejante pedazo de proyecto con las herramientas que propuse.</p>
