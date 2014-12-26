@@ -40,6 +40,16 @@
       </nav>
       <section>
         <h3>
+<a id="-changelog-dia-26122014-" class="anchor" href="#-changelog-dia-26122014-" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>&lt;&gt;&lt;&gt; CHANGELOG DIA 26/12/2014 &lt;&gt;&lt;&gt;</strong>
+</h3>
+
+<p>Los eventos están empezando a encajar como un puzzle ahora que he definido bien las funciones de cada modelo. Sólo me falta definir el comportamiento de las clases principales del MVC ante la llegada de un evento, de modo que el Controlador haga el desglose adecuado del ActionCommand para recibir adecuadamente la vista en la que se ha efectuado el evento de Swing, luego cuando recoja el evento de registro de la vista obtenga sus componentes y los registre para escuchar esos eventos de Swing.</p>
+
+<p>El modelo recibirá la vista y la acción y ejecturará una búsqueda de árbol descendente hasta localizar el evento origen de la vista, en el cual una vez se hayan hecho las operaciones oportunas con la base de datos XML, se parsearán las modificaciones a un array de String y se enviará junto con el identificador del modelo a la vista principal, la cual hará el mismo tipo de búsqueda y con el String y algunos flags en cada String indicando si el elemento es nuevo o reemplaza a a otro, se actualizará la vista, y enviará los nuevos elementos que se hayan podido crear al actionlistener del controlador.</p>
+
+<p>Una vez implementado eso, considero que el MVC está listo para construir las clases carcterísticas de la aplicación.</p>
+
+<h3>
 <a id="-changelog-dia-24122014-" class="anchor" href="#-changelog-dia-24122014-" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>&lt;&gt;&lt;&gt; CHANGELOG DIA 24/12/2014 &lt;&gt;&lt;&gt;</strong>
 </h3>
 
