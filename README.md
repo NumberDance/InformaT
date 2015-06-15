@@ -13,5 +13,7 @@ InformaT ha sido reformado en código y concepto, e incluye ahora el Pensadero, 
 ideas con las que estás de acuerdo, y en función de ello calcula tu alineación política personal y el partido que defiende 
 más el conjunto de tus intereses.
 
+Se considerará herramientas de participación futuramente.
+
 Se buscan personas con conocimientos de derecho y ciencias políticas para redactar y resumir las reformas a niveles 
 legislativos con un compromiso de neutralidad. Interesados contacten a javiergodas@gmail.com
