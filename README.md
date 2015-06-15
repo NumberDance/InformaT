@@ -16,4 +16,4 @@ más el conjunto de tus intereses.
 Se considerará herramientas de participación futuramente.
 
 Se buscan personas con conocimientos de derecho y ciencias políticas para redactar y resumir las reformas a niveles 
-legislativos con un compromiso de neutralidad. Interesados contacten a javiergodas@gmail.com
+legislativos con un compromiso de neutralidad. Interesados contacten a javiergodas@gmail.com.
