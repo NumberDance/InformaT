@@ -31,7 +31,8 @@ public class InformaT
   ModeloRaiz.obtenerInstancia().cargar();
   
   Document documento = BaseDatos.abrirTabla("base_datos/paises.xml");
-  String resultado = BaseDatos.consultarTabla(documento,"/paises/Pais[2]/text()");
+  
+  String resultado = BaseDatos.consultarTabla(documento,"/paises/Pais[@identificador='1']/text()");
   if(resultado != null)
   {
    System.out.println("Resultado: " + resultado);

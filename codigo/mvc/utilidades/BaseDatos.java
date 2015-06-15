@@ -35,11 +35,19 @@ public abstract class BaseDatos
   {
    XPathFactory xPathfactory = XPathFactory.newInstance();
    XPath xpath = xPathfactory.newXPath();
-   XPathExpression expr = xpath.compile(consulta);
+   XPathExpression expresion = xpath.compile(consulta);
+   NodeList extraccion = (NodeList) expresion.evaluate(tabla,XPathConstants.NODESET);
    
-   String resultado = expr.evaluate(tabla,XPathConstants.STRING).toString().trim();
+   String resultado = "";
+   for(int i = 0; i < extraccion.getLength(); i++)
+   {
+    String tag = extraccion.item(i).getParentNode().getNodeName();
+    String contenido = extraccion.item(i).getTextContent();
+       
+    resultado = resultado + tag + "->" + contenido + "|";
+   }
    
-   return resultado;
+   return resultado.replaceAll("\n","").replace(" ","");
   } 
   catch (XPathExpressionException ex) 
   { 
