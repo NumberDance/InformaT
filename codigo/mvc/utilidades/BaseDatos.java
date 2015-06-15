@@ -29,13 +29,14 @@ public abstract class BaseDatos
    return null;
   }
  }
+ 
  public static String consultarTabla(Document tabla,String consulta)
  {
   try 
   {
-   XPathFactory xPathfactory = XPathFactory.newInstance();
-   XPath xpath = xPathfactory.newXPath();
-   XPathExpression expresion = xpath.compile(consulta);
+   XPathFactory fabrica = XPathFactory.newInstance();
+   XPath compilador = fabrica.newXPath();
+   XPathExpression expresion = compilador.compile(consulta);
    NodeList extraccion = (NodeList) expresion.evaluate(tabla,XPathConstants.NODESET);
    
    String resultado = "";
