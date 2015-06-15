@@ -26,6 +26,9 @@ public final class ControladorRaiz extends Controlador implements ClaseEvento<Vi
  {
   Evento<ControladorRaiz,ModeloRaiz> evento = new Evento<ControladorRaiz,ModeloRaiz>(this,destinatario);
   evento.enviar();
+  
+  identificador = null;
+  accion = null;
  }
  public void recibirEvento(Evento<VistaRaiz,ClaseEvento> evento) 
  {

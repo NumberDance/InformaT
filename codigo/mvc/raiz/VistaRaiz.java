@@ -25,7 +25,8 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
   //vista y se añadirían posteriormente a la colección de componentes. Hecho 
   //esto, se manda un mensaje al controlador indicando los componentes que
   //interesa controlar desde allí. Para poner el código de acción, se usa el
-  //método setName() de cada componente swing.
+  //método setName() de cada componente swing. Una vez hecho, se busca en los 
+  //controlados de la vista marco por un componente llamado "base".
  }
  protected void actualizar(HashSet<String> modificados) 
  {
@@ -45,6 +46,8 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
  {
   Evento<VistaRaiz,ControladorRaiz> evento = new Evento<VistaRaiz,ControladorRaiz>(this,destinatario);
   evento.enviar();
+  
+  //Los controlados nunca se deben borrar.
  }
  public void recibirEvento(Evento<ModeloRaiz,ClaseEvento> evento) 
  {

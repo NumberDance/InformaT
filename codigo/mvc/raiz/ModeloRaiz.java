@@ -44,6 +44,8 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
  {
   Evento<ModeloRaiz,VistaRaiz> evento = new Evento<ModeloRaiz,VistaRaiz>(this,destinatario);
   evento.enviar();
+  
+  modificados.clear();
  }
  public void recibirEvento(Evento<ControladorRaiz,ClaseEvento> evento) 
  {

@@ -9,7 +9,7 @@ manera de ver la política en este país, de modo que no sólo sepas hasta qué 
 tu localidad y tu vida, sino además que sepas cuál es el partido que realmente representa tus valores y tus ideas a la 
 hora de afrontar los problemas del país.
 
-InformaT ha sido reformado en código y concepto, e incluye a hora el Pensadero, un espacio en el que se van guardando las
+InformaT ha sido reformado en código y concepto, e incluye ahora el Pensadero, un espacio en el que se van guardando las
 ideas con las que estás de acuerdo, y en función de ello calcula tu alineación política personal y el partido que defiende 
 más el conjunto de tus intereses.
 
