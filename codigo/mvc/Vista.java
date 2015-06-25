@@ -1,8 +1,8 @@
 package mvc;
 
+import java.awt.Container;
 import java.util.HashSet;
 import java.util.Iterator;
-import javax.swing.JComponent;
 
 public abstract class Vista 
 {
@@ -14,8 +14,8 @@ public abstract class Vista
  protected HashSet<Vista> elementos = null;
  
  //Colección de componentes gráficos de Swing de la vista y una subcolección para leer desde eventos
- protected HashSet<JComponent> componentes = null;
- protected HashSet<JComponent> controlados = null;
+ protected final HashSet<Container> componentes = new HashSet<Container>();
+ protected final HashSet<Container> controlados = new HashSet<Container>();
  
  //Constructores
  protected Vista(String identificador)
@@ -50,7 +50,7 @@ public abstract class Vista
  {
   if(componentes != null)
   {
-   Iterator<JComponent> i = componentes.iterator();
+   Iterator<Container> i = componentes.iterator();
    while(i.hasNext())
    { 
     i.next().setVisible(false); 
@@ -70,6 +70,6 @@ public abstract class Vista
  //Getters
  public final String obtenerIdentificador()
  { return identificador; }
- public final HashSet<JComponent> obtenerControlados()
+ public final HashSet<Container> obtenerControlados()
  { return controlados; }
 }

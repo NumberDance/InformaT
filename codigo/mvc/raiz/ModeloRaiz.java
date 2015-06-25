@@ -4,13 +4,15 @@ import java.util.HashSet;
 import mvc.Modelo;
 import mvc.raiz.evento.ClaseEvento;
 import mvc.raiz.evento.Evento;
-import pais.partido.Partido;
+import mvc.utilidades.BaseDatos;
+import org.w3c.dom.Document;
+import pais.Pais;
 
 public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorRaiz,VistaRaiz>  
 {
  //Singleton de la Raiz y sus ramas
  private static final ModeloRaiz instancia = new ModeloRaiz();
- private HashSet<Partido> partidos = null;
+ private HashSet<Pais> paises = null;
  
  //Constructores
  private ModeloRaiz()
@@ -27,6 +29,15 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
   //Los atributos compuestos para crear submodelos serán los únicos nodos con un atributo.
   //<xsd:complexType>
   //[Nodo]<>[Atributo == Identificador]
+     
+  Document documento = BaseDatos.abrirTabla("base_datos/paises.xml");
+  String resultado = BaseDatos.consultarTabla(documento,"/paises/Pais[@identificador='1']/text()");
+  if(resultado != null)
+  {
+   System.out.println("Resultado: " + resultado);
+  }
+     
+  enviarEvento(VistaRaiz.obtenerInstancia());
  }
  protected void modificar(String accion) 
  {

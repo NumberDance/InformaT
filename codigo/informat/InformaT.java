@@ -21,21 +21,11 @@ package informat;
 */
 
 import mvc.raiz.ModeloRaiz;
-import mvc.utilidades.BaseDatos;
-import org.w3c.dom.Document;
 
 public class InformaT 
 {
  public static void main(String[] args) 
  {
   ModeloRaiz.obtenerInstancia().cargar();
-  
-  Document documento = BaseDatos.abrirTabla("base_datos/paises.xml");
-  
-  String resultado = BaseDatos.consultarTabla(documento,"/paises/Pais[@identificador='1']/text()");
-  if(resultado != null)
-  {
-   System.out.println("Resultado: " + resultado);
-  }
  }  
 }

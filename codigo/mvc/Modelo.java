@@ -13,8 +13,8 @@ public abstract class Modelo
  protected HashSet<Modelo> contenido = null;
  
  //Coleción de datos extraídos de la base de datos XML y una subcolección para leer desde eventos
- protected HashSet<String> datos = null;
- protected HashSet<String> modificados = null;
+ protected final HashSet<String> datos = new HashSet<String>();
+ protected final HashSet<String> modificados = new HashSet<String>();
  
  //Constructores
  protected Modelo(String identificador)

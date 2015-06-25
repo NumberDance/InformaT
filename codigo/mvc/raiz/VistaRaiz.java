@@ -1,16 +1,19 @@
 package mvc.raiz;
 
 import java.util.HashSet;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.WindowConstants;
 import mvc.Vista;
 import mvc.raiz.evento.ClaseEvento;
 import mvc.raiz.evento.Evento;
-import pais.partido.VistaPartido;
+import pais.VistaPais;
 
 public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,ControladorRaiz>
 {
  //Singleton de la Raiz y sus ramas
  private static final VistaRaiz instancia = new VistaRaiz();
- private HashSet<VistaPartido> vista_partidos = null;
+ private HashSet<VistaPais> vistas_paises = null;
 
  //Constructores
  private VistaRaiz()
@@ -20,13 +23,38 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
  
  //Modelo
  public void mostrar() 
- {
-  //TODO: Aquí, usando las librerías de swing, se crearían los objetos de la 
-  //vista y se añadirían posteriormente a la colección de componentes. Hecho 
-  //esto, se manda un mensaje al controlador indicando los componentes que
-  //interesa controlar desde allí. Para poner el código de acción, se usa el
-  //método setName() de cada componente swing. Una vez hecho, se busca en los 
-  //controlados de la vista marco por un componente llamado "base".
+ {   
+  JFrame ventana = new JFrame();
+  ((JFrame)ventana).setName("ventana");
+  ((JFrame)ventana).setTitle("InformaT");
+  ((JFrame)ventana).setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+     
+  JTabbedPane panel = new JTabbedPane();
+  panel.setName("base");
+
+  javax.swing.GroupLayout layout = new javax.swing.GroupLayout(ventana.getContentPane());
+  ventana.getContentPane().setLayout(layout);        
+  layout.setHorizontalGroup
+  (
+   layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+   .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+  );
+  layout.setVerticalGroup
+  (
+   layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+   .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+  );
+  
+  ventana.pack();
+  
+  componentes.add(ventana);
+  componentes.add(panel);
+  
+  controlados.add(panel);
+  
+  enviarEvento(ControladorRaiz.obtenerInstancia());
+  
+  ventana.setVisible(true);
  }
  protected void actualizar(HashSet<String> modificados) 
  {
@@ -39,6 +67,11 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
   //vista con ese identificador. Si una nueva vista es creada, tiene que enviar
   //un evento al controlador una vez se muestre para que pueda recojer las acciones
   //sobre la nueva.
+     
+  if(modificados.isEmpty())
+  {
+   mostrar();
+  }
  }
  
  //Eventos

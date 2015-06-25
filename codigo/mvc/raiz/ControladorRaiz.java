@@ -1,10 +1,10 @@
 package mvc.raiz;
 
+import java.awt.Container;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Iterator;
-import javax.swing.JComponent;
 import mvc.Controlador;
 import mvc.raiz.evento.ClaseEvento;
 import mvc.raiz.evento.Evento;
@@ -32,12 +32,12 @@ public final class ControladorRaiz extends Controlador implements ClaseEvento<Vi
  }
  public void recibirEvento(Evento<VistaRaiz,ClaseEvento> evento) 
  {
-  HashSet<JComponent> controlados = evento.obtenerEmisor().obtenerControlados();
+  HashSet<Container> controlados = evento.obtenerEmisor().obtenerControlados();
   
-  Iterator<JComponent> i = controlados.iterator();
+  Iterator<Container> i = controlados.iterator();
   while(i.hasNext())
   {
-   JComponent controlado = i.next();
+   Container controlado = i.next();
    
    controlado.addMouseListener(ControlSwing.obtenerInstancia());
    controlado.addKeyListener(ControlSwing.obtenerInstancia());
