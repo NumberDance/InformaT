@@ -9,7 +9,9 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -42,10 +44,22 @@ public abstract class BaseDatos
    String resultado = "";
    for(int i = 0; i < extraccion.getLength(); i++)
    {
-    String tag = extraccion.item(i).getParentNode().getNodeName();
-    String contenido = extraccion.item(i).getTextContent();
-       
-    resultado = resultado + tag + "->" + contenido + "|";
+    Node nodo = extraccion.item(i).getParentNode();
+     
+    //Si es un nodo de datos se añade con ->, y si no tiene nodo padre entonces
+    //es un atributo, por lo cual es el una referencia a un sub-objeto, entonces
+    //se añade <> y se obtiene el nodo propietario del atributo, de manera que
+    //la vista pueda los distinguir.
+    if(nodo == null)
+    {
+     String propietario = ((Attr)extraccion.item(i)).getOwnerElement().getNodeName();
+     resultado = resultado + propietario + "<>" + extraccion.item(i).getTextContent() + "|";
+    }
+    else
+    {
+     String contenido = extraccion.item(i).getTextContent();
+     resultado = resultado + nodo.getNodeName() + "->" + contenido + "|";
+    }
    }
    
    return resultado.replaceAll("\n","").replace(" ","");

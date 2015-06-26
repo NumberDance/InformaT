@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
 <paises>
-    <Pais identificador="1">
-      Hola 
+    <Pais identificador="España">
+        <poblacion>3.000.000</poblacion> 
+        <reformas>
+            <Reforma identificador="REF1"/>
+            <Reforma identificador="REF2"/>
+        </reformas>
     </Pais>
-    <Pais>
-      Adios
+    <Pais identificador="Francia">
+        <poblacion>4.000.000</poblacion> 
+        <reformas>
+            <Reforma identificador="REF3"/>
+            <Reforma identificador="REF4"/>
+        </reformas>
     </Pais>
 </paises>
