@@ -1,6 +1,7 @@
 package mvc.raiz;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import mvc.Modelo;
 import mvc.raiz.evento.ClaseEvento;
 import mvc.raiz.evento.Evento;
@@ -29,12 +30,17 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
   //Los atributos compuestos para crear submodelos serán los únicos nodos con un atributo.
   //<xsd:complexType>
   //[Nodo]<>[Atributo == Identificador]
-     
-  Document documento = BaseDatos.abrirTabla("base_datos/paises.xml");
-  String resultado = BaseDatos.consultarTabla(documento,"/paises/Pais/poblacion/text()");
+   
+  //Consulta de prueba
+  Document tabla = BaseDatos.abrirTabla("base_datos/paises.xml");
+  HashSet<String> resultado = BaseDatos.consultarTabla(tabla,"/paises/Pais/@identificador");
   if(resultado != null)
   {
-   System.out.println("Resultado: " + resultado);
+   Iterator<String> i = resultado.iterator();
+   while(i.hasNext())
+   {
+    System.out.println(i.next());
+   }
   }
      
   enviarEvento(VistaRaiz.obtenerInstancia());
@@ -48,6 +54,7 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
   //los datos por aquellos que tengan la relación <> de submodelo y lo creará
   //con dicho identificador. Luego se manda una señal para crear su respectiva
   //vista.
+  enviarEvento(VistaRaiz.obtenerInstancia());
  }
     
  //Eventos

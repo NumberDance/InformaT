@@ -1,6 +1,7 @@
 package mvc.utilidades;
 
 import java.io.IOException;
+import java.util.HashSet;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -32,7 +33,7 @@ public abstract class BaseDatos
   }
  }
  
- public static String consultarTabla(Document tabla,String consulta)
+ public static HashSet<String> consultarTabla(Document tabla,String consulta)
  {
   try 
   {
@@ -41,28 +42,33 @@ public abstract class BaseDatos
    XPathExpression expresion = compilador.compile(consulta);
    NodeList extraccion = (NodeList) expresion.evaluate(tabla,XPathConstants.NODESET);
    
-   String resultado = "";
+   HashSet<String> datos = new HashSet<String>();
    for(int i = 0; i < extraccion.getLength(); i++)
    {
-    Node nodo = extraccion.item(i).getParentNode();
+    Node padre = extraccion.item(i).getParentNode();
      
     //Si es un nodo de datos se añade con ->, y si no tiene nodo padre entonces
     //es un atributo, por lo cual es el una referencia a un sub-objeto, entonces
     //se añade <> y se obtiene el nodo propietario del atributo, de manera que
     //la vista pueda los distinguir.
-    if(nodo == null)
+    //AVISO: Aún no se soporta la extracción de nodos enteros.
+    if(padre == null)
     {
      String propietario = ((Attr)extraccion.item(i)).getOwnerElement().getNodeName();
-     resultado = resultado + propietario + "<>" + extraccion.item(i).getTextContent() + "|";
+     String dato_complejo = propietario + "<>" + extraccion.item(i).getTextContent();
+     
+     datos.add(dato_complejo.replaceAll("\n","").replace(" ",""));
     }
     else
     {
      String contenido = extraccion.item(i).getTextContent();
-     resultado = resultado + nodo.getNodeName() + "->" + contenido + "|";
+     String dato_simple = padre.getNodeName() + "->" + contenido;
+     
+     datos.add(dato_simple.replaceAll("\n","").replace(" ",""));
     }
    }
    
-   return resultado.replaceAll("\n","").replace(" ","");
+   return datos;
   } 
   catch (XPathExpressionException ex) 
   { 

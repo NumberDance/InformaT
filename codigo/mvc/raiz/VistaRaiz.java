@@ -72,6 +72,10 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
   {
    mostrar();
   }
+  else
+  {
+   
+  }
  }
  
  //Eventos
