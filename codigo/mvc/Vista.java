@@ -11,7 +11,7 @@ public abstract class Vista
  
  //Relaciones de composición
  protected Vista marco = null;
- protected HashSet<Vista> elementos = null;
+ protected final HashSet<Vista> elementos = new HashSet<Vista>();
  
  //Colección de componentes gráficos de Swing de la vista y una subcolección para leer desde eventos
  protected final HashSet<Container> componentes = new HashSet<Container>();

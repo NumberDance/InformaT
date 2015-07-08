@@ -10,7 +10,7 @@ public abstract class Modelo
  
  //Relaciones de composición
  protected Modelo contexto = null;
- protected HashSet<Modelo> contenido = null;
+ protected final HashSet<Modelo> contenido = new HashSet<Modelo>();
  
  //Coleción de datos extraídos de la base de datos XML y una subcolección para leer desde eventos
  protected final HashSet<String> datos = new HashSet<String>();

@@ -17,9 +17,19 @@ public final class ControladorRaiz extends Controlador implements ClaseEvento<Vi
     
  //Control de Swing
  public void ratonPulsado(MouseEvent evento) 
- {}
+ {
+  identificador = ((Container)evento.getSource()).getName().split("_")[0];
+  accion = ((Container)evento.getSource()).getName().split("_")[1] + "_Click_" + evento.getButton();
+ 
+  enviarEvento(ModeloRaiz.obtenerInstancia());
+ }
  public void teclaPulsada(KeyEvent evento) 
- {}
+ {
+  identificador = ((Container)evento.getSource()).getName().split("_")[0];
+  accion = ((Container)evento.getSource()).getName().split("_")[1] + "_Tecla_" + evento.getKeyChar();
+ 
+  enviarEvento(ModeloRaiz.obtenerInstancia());
+ }
  
  //Eventos
  public void enviarEvento(ModeloRaiz destinatario) 

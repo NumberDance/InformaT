@@ -13,7 +13,6 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
 {
  //Singleton de la Raiz y sus ramas
  private static final ModeloRaiz instancia = new ModeloRaiz();
- private HashSet<Pais> paises = null;
  
  //Constructores
  private ModeloRaiz()
@@ -23,23 +22,25 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
  
  //Vista
  public void cargar() 
- {
-  //TODO: Una vez definida la base de datos, extraer los elementos y hacer una relación.
-  //<xsd:simpleType>
-  //[Nodo]->[Valor]
-  //Los atributos compuestos para crear submodelos serán los únicos nodos con un atributo.
-  //<xsd:complexType>
-  //[Nodo]<>[Atributo == Identificador]
-   
+ { 
   //Consulta de prueba
   Document tabla = BaseDatos.abrirTabla("base_datos/paises.xml");
   HashSet<String> resultado = BaseDatos.consultarTabla(tabla,"/paises/Pais/@identificador");
+  
+  //Se comprueba si hay datos complejos y se crean el contenido si es necesario
   if(resultado != null)
   {
    Iterator<String> i = resultado.iterator();
    while(i.hasNext())
    {
-    System.out.println(i.next());
+    String siguiente = i.next();
+    
+    if(siguiente.contains("Pais<>"))
+    {
+     contenido.add(new Pais(siguiente.split("<>")[1],this));
+    }
+    
+    modificados.add(siguiente);
    }
   }
      
@@ -54,7 +55,7 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
   //los datos por aquellos que tengan la relación <> de submodelo y lo creará
   //con dicho identificador. Luego se manda una señal para crear su respectiva
   //vista.
-  enviarEvento(VistaRaiz.obtenerInstancia());
+  System.out.println("Recibido");
  }
     
  //Eventos

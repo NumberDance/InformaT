@@ -1,6 +1,7 @@
 package mvc.raiz;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
@@ -13,7 +14,6 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
 {
  //Singleton de la Raiz y sus ramas
  private static final VistaRaiz instancia = new VistaRaiz();
- private HashSet<VistaPais> vistas_paises = null;
 
  //Constructores
  private VistaRaiz()
@@ -24,13 +24,13 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
  //Modelo
  public void mostrar() 
  {   
+  //La ventana de la aplicación
   JFrame ventana = new JFrame();
-  ((JFrame)ventana).setName("ventana");
   ((JFrame)ventana).setTitle("InformaT");
   ((JFrame)ventana).setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
      
+  //El panel de tabs que contendrá todas las vistas
   JTabbedPane panel = new JTabbedPane();
-  panel.setName("base");
 
   javax.swing.GroupLayout layout = new javax.swing.GroupLayout(ventana.getContentPane());
   ventana.getContentPane().setLayout(layout);        
@@ -47,9 +47,15 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
   
   ventana.pack();
   
+  //Identificador del objeto y del elemento para el controlador
+  ventana.setName("Raiz_ventana");
+  panel.setName("Raiz_base");
+  
+  //Agregar los componentes
   componentes.add(ventana);
   componentes.add(panel);
   
+  //Preparar el panel para ser controlado
   controlados.add(panel);
   
   enviarEvento(ControladorRaiz.obtenerInstancia());
@@ -61,21 +67,29 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
   //TODO: Recibido el array de modificados, esa vista oportuna determina si se
   //trata de actualizar una vista existente o se trata de crear y mostrar una 
   //nueva vista. Eso se distinge debido a que, si entre el array de modificados
-  //hay un único dato con la marca <>, significa que es una petición de 
-  //crear una subvista dentro de la del identificador que hace de marco. Si no 
-  //hay ninguna y sólo datos simples, es una petición de actualización de la 
+  //hay un datos con la marca <>, son una petición de 
+  //crear una subvista dentro de la del identificador que hace de marco. Si
+  //hay datos simples, es una petición de actualización de la 
   //vista con ese identificador. Si una nueva vista es creada, tiene que enviar
   //un evento al controlador una vez se muestre para que pueda recojer las acciones
   //sobre la nueva.
-     
-  if(modificados.isEmpty())
+  if(componentes.isEmpty())
   {
    mostrar();
   }
-  else
+
+  //Se compruea si hay datos complejos y en función de ello se crea las subvistas
+  Iterator<String> i = modificados.iterator();
+  while(i.hasNext())
   {
-   
+   String siguiente = i.next();
+   if(siguiente.contains("Pais<>"))
+   {
+    elementos.add(new VistaPais(siguiente.split("<>")[1],this));
+   }
   }
+  
+  //TODO: Actualizar los componentes de la vista en concreto
  }
  
  //Eventos
