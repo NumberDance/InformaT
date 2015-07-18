@@ -25,17 +25,17 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
  { 
   //Se conoce en todo momento si se están extrayendo datos simples o complejos
   // con @identificador: dato complejo
-  // sin @identificador: dato simple
+  // con text(): dato simple
   // BaseDatos se encarga de añadirles tanto el tipo de dato como el nombre del 
   // dato para ayudar a la Vista a distingir el tipo de petición.
   Document tabla = BaseDatos.abrirTabla("base_datos/paises.xml");
+  
   HashSet<String> resultado = BaseDatos.consultarTabla(tabla,"/paises/Pais/@identificador");
-     
   Iterator<String> i = resultado.iterator();
   while(i.hasNext())
   {
    String siguiente = i.next();
-     
+   
    contenido.add(new Pais(siguiente.split("<>")[1],this));
    modificados.add(siguiente);
   }
