@@ -5,7 +5,6 @@ import java.util.HashSet;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -37,15 +36,13 @@ public abstract class BaseDatos
  {
   try 
   {
-   XPathFactory fabrica = XPathFactory.newInstance();
-   XPath compilador = fabrica.newXPath();
-   XPathExpression expresion = compilador.compile(consulta);
-   NodeList extraccion = (NodeList) expresion.evaluate(tabla,XPathConstants.NODESET);
+   XPathExpression expresion = XPathFactory.newInstance().newXPath().compile(consulta);
+   NodeList resultado = (NodeList) expresion.evaluate(tabla,XPathConstants.NODESET);
    
    HashSet<String> datos = new HashSet<String>();
-   for(int i = 0; i < extraccion.getLength(); i++)
+   for(int i = 0; i < resultado.getLength(); i++)
    {
-    Node padre = extraccion.item(i).getParentNode();
+    Node padre = resultado.item(i).getParentNode();
      
     //Si es un nodo de datos se añade con ->, y si no tiene nodo padre entonces
     //es un atributo, por lo cual es el una referencia a un sub-objeto, entonces
@@ -54,14 +51,14 @@ public abstract class BaseDatos
     //AVISO: Aún no se soporta la extracción de nodos enteros.
     if(padre == null)
     {
-     String propietario = ((Attr)extraccion.item(i)).getOwnerElement().getNodeName();
-     String dato_complejo = propietario + "<>" + extraccion.item(i).getTextContent();
+     String propietario = ((Attr)resultado.item(i)).getOwnerElement().getNodeName();
+     String dato_complejo = propietario + "<>" + resultado.item(i).getTextContent();
      
      datos.add(dato_complejo.replaceAll("\n","").replace(" ",""));
     }
     else
     {
-     String contenido = extraccion.item(i).getTextContent();
+     String contenido = resultado.item(i).getTextContent();
      String dato_simple = padre.getNodeName() + "->" + contenido;
      
      datos.add(dato_simple.replaceAll("\n","").replace(" ",""));

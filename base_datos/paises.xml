@@ -2,17 +2,17 @@
 
 <paises>
     <Pais identificador="España">
-        <poblacion>3.000.000</poblacion> 
-        <reformas>
-            <Reforma identificador="REF1"/>
-            <Reforma identificador="REF2"/>
-        </reformas>
+        <poblacion>3.000.000</poblacion>
+        <partidos>    
+            <Partido identificador="REF1"/>
+            <Partido identificador="REF2"/>
+        </partidos>
     </Pais>
     <Pais identificador="Francia">
         <poblacion>4.000.000</poblacion> 
-        <reformas>
-            <Reforma identificador="REF3"/>
-            <Reforma identificador="REF4"/>
-        </reformas>
+        <partidos>
+            <Partido identificador="REF3"/>
+            <Partido identificador="REF4"/>
+        </partidos>
     </Pais>
 </paises>
