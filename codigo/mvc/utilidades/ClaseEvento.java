@@ -1,4 +1,4 @@
-package mvc.raiz.evento;
+package mvc.utilidades;
 
 public abstract interface ClaseEvento<Mensajero extends ClaseEvento, Destinatario extends ClaseEvento>
 {

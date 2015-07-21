@@ -45,21 +45,6 @@ public abstract class Modelo
   }
  }
  protected abstract void modificar(String accion);
- protected void guardar()
- {
-  //TODO: Hacer una consulta para modificar los datos en la copia y reemplazar
-  //el fichero actual por la base de datos modificada. Si no se han hecho cambios,
-  //se comprueba y no se guarda.
-     
-  if(contenido != null)
-  {
-   Iterator<Modelo> i = contenido.iterator();
-   while(i.hasNext())
-   { 
-    i.next().guardar(); 
-   }
-  }
- }
  
  //Getters
  public final String obtenerIdentificador()

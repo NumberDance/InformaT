@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.WindowConstants;
 import mvc.Vista;
-import mvc.raiz.evento.ClaseEvento;
-import mvc.raiz.evento.Evento;
+import mvc.utilidades.ClaseEvento;
+import mvc.utilidades.Evento;
 import pais.VistaPais;
 
 public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,ControladorRaiz>
@@ -78,7 +78,7 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
    mostrar();
   }
 
-  //Se compruea si hay datos complejos y en función de ello se crea las subvistas
+  //Se comprueba si hay datos complejos y en función de ello se crea las subvistas
   Iterator<String> i = modificados.iterator();
   while(i.hasNext())
   {
@@ -97,8 +97,6 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
  {
   Evento<VistaRaiz,ControladorRaiz> evento = new Evento<VistaRaiz,ControladorRaiz>(this,destinatario);
   evento.enviar();
-  
-  //Los controlados nunca se deben borrar.
  }
  public void recibirEvento(Evento<ModeloRaiz,ClaseEvento> evento) 
  {

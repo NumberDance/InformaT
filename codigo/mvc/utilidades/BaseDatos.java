@@ -2,6 +2,7 @@ package mvc.utilidades;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Iterator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -9,6 +10,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import mvc.Modelo;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -17,25 +19,23 @@ import org.xml.sax.SAXException;
 
 public abstract class BaseDatos 
 {
- public static Document abrirTabla(String ruta)
+ //Apertura de la tabla, sólo disponible localmente.
+ private static Document abrirTabla(String ruta) throws IOException, ParserConfigurationException, SAXException 
  {
-  try
-  {
-   DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
-   DocumentBuilder constructor = fabrica.newDocumentBuilder();
+  DocumentBuilderFactory fabrica = DocumentBuilderFactory.newInstance();
+  DocumentBuilder constructor = fabrica.newDocumentBuilder();
    
-   return constructor.parse(ruta);
-  }
-  catch(IOException | ParserConfigurationException | SAXException e)
-  { 
-   return null;
-  }
- }
+  return constructor.parse(ruta);
+ } 
  
- public static HashSet<String> consultarTabla(Document tabla,String consulta)
- {
+ 
+ //Lectura de la tabla.
+ public static HashSet<String> leerTabla(String ruta_tabla,String consulta)
+ {   
   try 
-  {
+  {   
+   Document tabla = abrirTabla(ruta_tabla);
+      
    XPathExpression expresion = XPathFactory.newInstance().newXPath().compile(consulta);
    NodeList resultado = (NodeList) expresion.evaluate(tabla,XPathConstants.NODESET);
    
@@ -45,9 +45,10 @@ public abstract class BaseDatos
     Node padre = resultado.item(i).getParentNode();
      
     //Si es un nodo de datos se añade con ->, y si no tiene nodo padre entonces
-    //es un atributo, por lo cual es el una referencia a un sub-objeto, entonces
+    //es un atributo, por lo cual es una referencia a un sub-objeto, entonces
     //se añade <> y se obtiene el nodo propietario del atributo, de manera que
     //la vista pueda los distinguir.
+    
     //AVISO: Aún no se soporta la extracción de nodos enteros.
     if(padre == null)
     {
@@ -67,13 +68,44 @@ public abstract class BaseDatos
    
    return datos;
   } 
-  catch (XPathExpressionException ex) 
+  catch(IOException | ParserConfigurationException | SAXException e)
+  {
+   System.out.println("ERROR: No se ha podido abrir el DOM.");
+   System.exit(1);
+   return null;
+  }
+  catch (XPathExpressionException e) 
   { 
+   System.out.println("ERROR: No se ha podido ejecutar el XPath.");
+   System.exit(1);
    return null; 
   }
  }
+ //TODO: Escritura de la tabla.
+ public static void escribirTabla(String ruta_tabla, Modelo modelo)
+ {
+  try
+  {
+   Document tabla = abrirTabla(ruta_tabla);
+   
+   XPathExpression expresion = XPathFactory.newInstance().newXPath().compile("//");
+   NodeList resultado = (NodeList) expresion.evaluate(tabla,XPathConstants.NODESET);
+   
+   Iterator<String> i = modelo.obtenerModificados().iterator();
+   while(i.hasNext())
+   {
     
- //TODO: Averiguar cómo, mediante comandos, modificar la base de datos extraída
- //para luego sobreescribir esa parte en concreto de la base datos sin tener
- //que reemplazar el documento entero.
+   }
+  }
+  catch(IOException | ParserConfigurationException | SAXException e)
+  {
+   System.out.println("ERROR: No se ha podido abrir el DOM.");
+   System.exit(1);
+  }
+  catch (XPathExpressionException e) 
+  { 
+   System.out.println("ERROR: No se ha podido ejecutar el XPath.");
+   System.exit(1); 
+  }
+ }
 }

@@ -3,10 +3,9 @@ package mvc.raiz;
 import java.util.HashSet;
 import java.util.Iterator;
 import mvc.Modelo;
-import mvc.raiz.evento.ClaseEvento;
-import mvc.raiz.evento.Evento;
+import mvc.utilidades.ClaseEvento;
+import mvc.utilidades.Evento;
 import mvc.utilidades.BaseDatos;
-import org.w3c.dom.Document;
 import pais.Pais;
 
 public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorRaiz,VistaRaiz>  
@@ -23,14 +22,15 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
  //Vista
  public void cargar() 
  { 
-  //Se conoce en todo momento si se están extrayendo datos simples o complejos
+  // Se debe conocer en todo momento si se están extrayendo datos simples o complejos
   // con @identificador: dato complejo
   // con text(): dato simple
   // BaseDatos se encarga de añadirles tanto el tipo de dato como el nombre del 
   // dato para ayudar a la Vista a distingir el tipo de petición.
-  Document tabla = BaseDatos.abrirTabla("base_datos/paises.xml");
   
-  HashSet<String> resultado = BaseDatos.consultarTabla(tabla,"/paises/Pais/@identificador");
+  // NOTA: Para cargar todos los datos de un objeto a partir del identificador
+  // /paises/Pais[@identificador='España']/*/text()
+  HashSet<String> resultado = BaseDatos.leerTabla("base_datos/paises.xml","/paises/Pais[@identificador='España']/@identificador");
   Iterator<String> i = resultado.iterator();
   while(i.hasNext())
   {
@@ -39,8 +39,11 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
    contenido.add(new Pais(siguiente.split("<>")[1],this));
    modificados.add(siguiente);
   }
-     
+  
   enviarEvento(VistaRaiz.obtenerInstancia());
+  
+  //Se limpian los modificados, ya que son en realidad los datos iniciales.
+  modificados.clear();
  }
  protected void modificar(String accion) 
  {
@@ -51,7 +54,6 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
   //los datos por aquellos que tengan la relación <> de submodelo y lo creará
   //con dicho identificador. Luego se manda una señal para crear su respectiva
   //vista.
-  System.out.println("Recibido");
  }
     
  //Eventos
@@ -59,8 +61,6 @@ public final class ModeloRaiz extends Modelo implements ClaseEvento<ControladorR
  {
   Evento<ModeloRaiz,VistaRaiz> evento = new Evento<ModeloRaiz,VistaRaiz>(this,destinatario);
   evento.enviar();
-  
-  modificados.clear();
  }
  public void recibirEvento(Evento<ControladorRaiz,ClaseEvento> evento) 
  {

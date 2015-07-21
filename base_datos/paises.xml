@@ -3,16 +3,10 @@
 <paises>
     <Pais identificador="España">
         <poblacion>3.000.000</poblacion>
-        <partidos>    
-            <Partido identificador="REF1"/>
-            <Partido identificador="REF2"/>
-        </partidos>
+        <colores_bandera>rojo,amarillo,rojo</colores_bandera>
     </Pais>
     <Pais identificador="Francia">
-        <poblacion>4.000.000</poblacion> 
-        <partidos>
-            <Partido identificador="REF3"/>
-            <Partido identificador="REF4"/>
-        </partidos>
+        <poblacion>4.000.000</poblacion>
+        <colores_bandera>azul,blanco,rojo</colores_bandera>
     </Pais>
 </paises>

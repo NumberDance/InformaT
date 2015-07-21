@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.Iterator;
 import mvc.Controlador;
-import mvc.raiz.evento.ClaseEvento;
-import mvc.raiz.evento.Evento;
+import mvc.utilidades.ClaseEvento;
+import mvc.utilidades.Evento;
 import mvc.utilidades.ControlSwing;
 
 public final class ControladorRaiz extends Controlador implements ClaseEvento<VistaRaiz,ModeloRaiz>
@@ -36,9 +36,6 @@ public final class ControladorRaiz extends Controlador implements ClaseEvento<Vi
  {
   Evento<ControladorRaiz,ModeloRaiz> evento = new Evento<ControladorRaiz,ModeloRaiz>(this,destinatario);
   evento.enviar();
-  
-  identificador = null;
-  accion = null;
  }
  public void recibirEvento(Evento<VistaRaiz,ClaseEvento> evento) 
  {

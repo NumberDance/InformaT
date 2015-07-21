@@ -46,26 +46,6 @@ public abstract class Vista
   }
  }
  protected abstract void actualizar(HashSet<String> modificados);
- protected void ocultar()
- {
-  if(componentes != null)
-  {
-   Iterator<Container> i = componentes.iterator();
-   while(i.hasNext())
-   { 
-    i.next().setVisible(false); 
-   }
-  }
-     
-  if(elementos != null)
-  {
-   Iterator<Vista> i = elementos.iterator();
-   while(i.hasNext())
-   { 
-    i.next().ocultar(); 
-   }
-  }
- }
  
  //Getters
  public final String obtenerIdentificador()

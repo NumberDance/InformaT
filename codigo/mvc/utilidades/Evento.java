@@ -1,4 +1,6 @@
-package mvc.raiz.evento;
+package mvc.utilidades;
+
+import mvc.utilidades.ClaseEvento;
 
 public final class Evento<Emisor extends ClaseEvento,Receptor extends ClaseEvento>
 {
