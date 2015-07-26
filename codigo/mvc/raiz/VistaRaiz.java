@@ -87,6 +87,7 @@ public final class VistaRaiz extends Vista implements ClaseEvento<ModeloRaiz,Con
    {
     elementos.add(new VistaPais(siguiente.split("<>")[1],this));
    }
+   //Y sucesivamente para los demás tipos de componente que pueda haber.
   }
   
   //TODO: Actualizar los componentes de la vista en concreto
