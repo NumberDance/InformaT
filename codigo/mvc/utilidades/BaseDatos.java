@@ -82,7 +82,7 @@ public abstract class BaseDatos
   }
  }
  //TODO: Escritura de la tabla.
- public static void escribirTabla4(String ruta_tabla, Modelo modelo)
+ public static void escribirTabla(String ruta_tabla, Modelo modelo)
  {
   try
   {
