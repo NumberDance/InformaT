@@ -1,3 +1,4 @@
+<%@page import="raiz.VistaRaiz"%>
 <html>
     <!--CABECERA-->
     <head>
@@ -7,6 +8,7 @@
     <!--CUERPO-->
     <body>
         <%
+          out.println(new VistaRaiz().mostrar());
         %>
     </body>
 </html>
