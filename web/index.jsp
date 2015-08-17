@@ -8,6 +8,16 @@
     <!--CUERPO-->
     <body>
         <%
+          Usuario usuario = getSession("User");
+          ArrayList lista = usuario.cargarListaDeContactos(); // El usuario ya tiene su ID guardado
+                                                              // internamente se hacen consultas sql
+                                                              
+        foreach(contacto : lista){%>
+            
+            <div>nombre Tal y Cual</div>
+            
+        <%}
+        
           out.println(new VistaRaiz().mostrar());
           if(atributo == "Registro"){
         %>
