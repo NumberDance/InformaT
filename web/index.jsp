@@ -9,6 +9,19 @@
     <body>
         <%
           out.println(new VistaRaiz().mostrar());
+          if(atributo == "Registro"){
         %>
+        
+        <codigo>
+        html
+        </codigo>
+        
+        <%}else if(atributo == "Pensadero"){%>
+        
+        <codigo>
+        html
+        </codigo>
+        
+        <%}%>
     </body>
 </html>
