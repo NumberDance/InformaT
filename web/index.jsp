@@ -21,7 +21,7 @@
             foreach(Seccion sec : lista_secciones){
             %>
                 <!-- Sección del menú -->
-                <li> 
+                <li enabled="<%sec.getBoolean();%>"> 
                     <% sec.getNombre(); %> 
                 </li>
                 
